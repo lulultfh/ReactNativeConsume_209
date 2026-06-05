@@ -1,0 +1,2 @@
+export const API_URL =
+  "https://ternak-be-production-8ceb.up.railway.app/api/v1";
