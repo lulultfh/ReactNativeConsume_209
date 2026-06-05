@@ -1,8 +1,8 @@
 export interface Hewan {
   id?: number;
-  nama: String;
-  jenis: String;
-  tanggal_lahir: String;
+  nama: string;
+  jenis: string;
+  tanggal_lahir: string;
   harga: number;
   status?: "tersedia" | "terjual";
   createdAt?: string;
