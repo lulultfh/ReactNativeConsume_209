@@ -1,6 +1,6 @@
 # Consume API React Native
 
->This project was created for Tugas Praktikum PAML pertemuan 13 <br>
+>This project was created for Tugas Praktikum PAML pertemuan 14 <br>
 >Nama: Lu'lu' Luthfiah<br>
 >NIM: 20230140209
 
