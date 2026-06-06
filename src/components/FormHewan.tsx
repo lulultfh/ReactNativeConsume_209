@@ -1,6 +1,7 @@
 import { Hewan } from "@/domain/entities/Hewan";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Picker } from "@react-native-picker/picker";
+import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import {
     ActivityIndicator,
@@ -35,6 +36,8 @@ export default function FormHewan({
   const [status, setStatus] = useState<"tersedia" | "terjual">("tersedia");
   const [tanggalLahir, setTanggalLahir] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     if (initialData) {
