@@ -120,7 +120,7 @@ export default function DashboardScreen() {
         />
         <TouchableOpacity
           style={styles.fab}
-          onPress={() => router.push("/main/create")}
+          onPress={() => router.push("/main/form")}
         >
           <ThemedText style={styles.fabText}>+</ThemedText>
         </TouchableOpacity>
