@@ -18,6 +18,7 @@ import { ThemedView } from "./ThemedView";
 interface HewanProps {
   initialData?: Hewan;
   loading?: boolean;
+  title?: string;
   submit?: string;
   onSubmit: (data: Omit<Hewan, "id">) => void;
 }
@@ -25,6 +26,7 @@ interface HewanProps {
 export default function FormHewan({
   initialData,
   loading,
+  title = "Tambah Ternak Baru",
   submit = "Simpan",
   onSubmit,
 }: HewanProps) {
@@ -85,7 +87,7 @@ export default function FormHewan({
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
         <ThemedView style={styles.header}>
-          <ThemedText type="title">Tambah Ternak Baru</ThemedText>
+          <ThemedText type="title">{title}</ThemedText>
         </ThemedView>
         <ThemedView style={styles.form}>
           <TextInput
