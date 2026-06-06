@@ -129,6 +129,7 @@ export default function FormHewan({
               value={tanggalLahir}
               mode="date"
               display={Platform.OS === "ios" ? "spinner" : "default"}
+              maximumDate={new Date()}
               onChange={(_, selectedDate) => {
                 if (selectedDate) {
                   setTanggalLahir(selectedDate);
