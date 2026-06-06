@@ -1,5 +1,5 @@
 import { Hewan } from "@/domain/entities/Hewan";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface HewanProps {
   initialData?: Hewan;
@@ -20,4 +20,14 @@ export default function FormHewan({
   const [status, setStatus] = useState<"tersedia" | "terjual">("tersedia");
   const [tanggalLahir, setTanggalLahir] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
+
+  useEffect(() => {
+    if (initialData) {
+      setNama(initialData.nama);
+      setJenis(initialData.jenis);
+      setHarga(initialData.harga.toString());
+      setStatus(initialData.status ?? "tersedia");
+      setTanggalLahir(new Date(initialData.tanggal_lahir));
+    }
+  }, [initialData]);
 }
