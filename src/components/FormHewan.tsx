@@ -127,7 +127,7 @@ export default function FormHewan({
               value={tanggalLahir}
               mode="date"
               display={Platform.OS === "ios" ? "spinner" : "default"}
-              onValueChange={(_, selectedDate) => {
+              onChange={(_, selectedDate) => {
                 if (selectedDate) {
                   setTanggalLahir(selectedDate);
                 }
@@ -154,9 +154,7 @@ export default function FormHewan({
             {loading ? (
               <ActivityIndicator color="#fff" />
             ) : (
-              <ThemedText style={styles.submitButtonText}>
-                Simpan ke Database
-              </ThemedText>
+              <ThemedText style={styles.submitButtonText}>{submit}</ThemedText>
             )}
           </TouchableOpacity>
         </ThemedView>
