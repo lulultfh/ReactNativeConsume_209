@@ -92,7 +92,10 @@ export default function FormHewan({
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
         <ThemedView style={styles.headerRow}>
-          <TouchableOpacity onPress={() => router.back()}>
+          <TouchableOpacity
+            onPress={() => router.back()}
+            style={styles.backButton}
+          >
             <ArrowLeft size={24} color="#0284c7" />
           </TouchableOpacity>
           <ThemedText type="title">{title}</ThemedText>
@@ -244,5 +247,15 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 1,
     borderColor: "#cbd5e1",
+  },
+  headerRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    marginVertical: 24,
+  },
+  backButton: {
+    padding: 6,
+    borderRadius: 8,
   },
 });
