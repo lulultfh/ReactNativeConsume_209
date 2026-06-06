@@ -1,6 +1,19 @@
 import { Hewan } from "@/domain/entities/Hewan";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import { Picker } from "@react-native-picker/picker";
 import { useEffect, useState } from "react";
-import { Alert } from "react-native";
+import {
+    ActivityIndicator,
+    Alert,
+    Platform,
+    StyleSheet,
+    TextInput,
+    TouchableOpacity,
+    View,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { ThemedText } from "./ThemedText";
+import { ThemedView } from "./ThemedView";
 
 interface HewanProps {
   initialData?: Hewan;
@@ -67,4 +80,139 @@ export default function FormHewan({
       status,
     });
   };
+
+  return (
+    <ThemedView style={styles.container}>
+      <SafeAreaView style={styles.safeArea}>
+        <ThemedView style={styles.header}>
+          <ThemedText type="title">Tambah Ternak Baru</ThemedText>
+        </ThemedView>
+        <ThemedView style={styles.form}>
+          <TextInput
+            style={styles.input}
+            placeholder="Nama hewan"
+            placeholderTextColor="#94a3b8"
+            value={nama}
+            onChangeText={setNama}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Jenis Hewan(contoh: Sapi Limosin)"
+            placeholderTextColor="#94a3b8"
+            value={jenis}
+            onChangeText={setJenis}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Harga (Rupiah)"
+            placeholderTextColor="#94a3b8"
+            keyboardType="number-pad"
+            value={harga}
+            onChangeText={(text) => {
+              setHarga(text.replace(/[^0-9]/g, ""));
+            }}
+          />
+          <TouchableOpacity
+            style={styles.dateInputButton}
+            onPress={() => setShowDatePicker(true)}
+            activeOpacity={0.7}
+          >
+            <ThemedText style={styles.dateText}>
+              Tanggal Lahir: {formatDateString(tanggalLahir)}
+            </ThemedText>
+          </TouchableOpacity>
+
+          {showDatePicker && (
+            <DateTimePicker
+              value={tanggalLahir}
+              mode="date"
+              display={Platform.OS === "ios" ? "spinner" : "default"}
+              onValueChange={(_, selectedDate) => {
+                if (selectedDate) {
+                  setTanggalLahir(selectedDate);
+                }
+              }}
+              //   maximumDate={new Date()}
+            />
+          )}
+          <View style={styles.pickerContainer}>
+            <Picker
+              selectedValue={status}
+              onValueChange={(value) =>
+                setStatus(value as "tersedia" | "terjual")
+              }
+            >
+              <Picker.Item label="Tersedia" value="tersedia" />
+              <Picker.Item label="Terjual" value="terjual" />
+            </Picker>
+          </View>
+          <TouchableOpacity
+            style={styles.submitButton}
+            onPress={handleSubmit}
+            disabled={loading}
+          >
+            {loading ? (
+              <ActivityIndicator color="#fff" />
+            ) : (
+              <ThemedText style={styles.submitButtonText}>
+                Simpan ke Database
+              </ThemedText>
+            )}
+          </TouchableOpacity>
+        </ThemedView>
+      </SafeAreaView>
+    </ThemedView>
+  );
 }
+
+const styles = StyleSheet.create({
+  container: { flex: 1 },
+  safeArea: { flex: 1, paddingHorizontal: 24 },
+  header: { marginVertical: 24 },
+  form: { gap: 16 },
+  input: {
+    backgroundColor: "#f8fafc",
+    borderWidth: 1,
+    borderColor: "#cbd5e1",
+    borderRadius: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    fontSize: 16,
+    color: "#0f172a",
+  },
+  dateInputButton: {
+    backgroundColor: "#f8fafc",
+    borderWidth: 1,
+    borderColor: "#cbd5e1",
+    borderRadius: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    justifyContent: "center",
+  },
+  dateText: { fontSize: 16, color: "#334155" },
+  submitButton: {
+    backgroundColor: "#0284c7",
+    paddingVertical: 16,
+    borderRadius: 12,
+    alignItems: "center",
+    marginTop: 12,
+  },
+  submitButtonText: { color: "#ffffff", fontSize: 16, fontWeight: "bold" },
+  errorText: { color: "#ef4444", textAlign: "center", fontWeight: "600" },
+  activeStatus: {
+    backgroundColor: "#dbeafe",
+  },
+  statusButton: {
+    borderWidth: 1,
+    borderColor: "#cbd5e1",
+    borderRadius: 12,
+    padding: 14,
+    alignItems: "center",
+  },
+  pickerContainer: {
+    borderWidth: 1,
+    borderColor: "#cbd5e1",
+    borderRadius: 12,
+    overflow: "hidden",
+  },
+});
