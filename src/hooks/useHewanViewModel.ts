@@ -83,5 +83,14 @@ export const useHewanViewModel = () => {
     }
   };
 
-  return { hewanList, loading, error, fetchHewan, addHewan, deleteHewan };
+  return {
+    hewanList,
+    loading,
+    error,
+    fetchHewan,
+    addHewan,
+    deleteHewan,
+    fetchHewanById,
+    updateHewan,
+  };
 };
