@@ -53,6 +53,8 @@ export default function FormHewan({
     return `${year}-${month}-${day}`;
   };
 
+  const isEditMode = !!initialData;
+
   const handleSubmit = () => {
     const cleanNama = nama.trim();
     const cleanJenis = jenis.trim();
@@ -78,7 +80,7 @@ export default function FormHewan({
       jenis: cleanJenis,
       harga: numericHarga,
       tanggal_lahir: formatDateString(tanggalLahir),
-      status,
+      status: isEditMode ? status : "tersedia",
     });
   };
   console.log("showDatePicker:", showDatePicker);
@@ -145,17 +147,23 @@ export default function FormHewan({
               }}
             />
           )}
-          <View style={styles.pickerContainer}>
-            <Picker
-              selectedValue={status}
-              onValueChange={(value) =>
-                setStatus(value as "tersedia" | "terjual")
-              }
-            >
-              <Picker.Item label="Tersedia" value="tersedia" />
-              <Picker.Item label="Terjual" value="terjual" />
-            </Picker>
-          </View>
+          {isEditMode ? (
+            <View style={styles.pickerContainer}>
+              <Picker
+                selectedValue={status}
+                onValueChange={(value) =>
+                  setStatus(value as "tersedia" | "terjual")
+                }
+              >
+                <Picker.Item label="Tersedia" value="tersedia" />
+                <Picker.Item label="Terjual" value="terjual" />
+              </Picker>
+            </View>
+          ) : (
+            <View style={styles.statusLocked}>
+              <ThemedText>Status: Tersedia</ThemedText>
+            </View>
+          )}
           <TouchableOpacity
             style={styles.submitButton}
             onPress={handleSubmit}
@@ -222,5 +230,12 @@ const styles = StyleSheet.create({
     borderColor: "#cbd5e1",
     borderRadius: 12,
     overflow: "hidden",
+  },
+  statusLocked: {
+    backgroundColor: "#f1f5f9",
+    padding: 14,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#cbd5e1",
   },
 });
