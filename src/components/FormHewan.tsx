@@ -1,5 +1,6 @@
 import { Hewan } from "@/domain/entities/Hewan";
 import { useEffect, useState } from "react";
+import { Alert } from "react-native";
 
 interface HewanProps {
   initialData?: Hewan;
@@ -36,5 +37,34 @@ export default function FormHewan({
     const month = String(date.getMonth() + 1).padStart(2, "0");
     const day = String(date.getDate()).padStart(2, "0");
     return `${year}-${month}-${day}`;
+  };
+
+  const handleSubmit = () => {
+    const cleanNama = nama.trim();
+    const cleanJenis = jenis.trim();
+    const numericHarga = Number(harga);
+
+    if (!cleanNama) {
+      Alert.alert("Validasi Gagal", "Nama hewan wajib diisi");
+      return;
+    }
+    if (!cleanJenis) {
+      Alert.alert("Validasi Gagal", "Jenis hewan wajib diisi");
+      return;
+    }
+    if (!harga || isNaN(numericHarga) || numericHarga <= 0) {
+      Alert.alert(
+        "Validasi Gagal",
+        "Harga harus berupa angka lebih besar dari 0",
+      );
+      return;
+    }
+    onSubmit({
+      nama: cleanNama,
+      jenis: cleanJenis,
+      harga: numericHarga,
+      tanggal_lahir: formatDateString(tanggalLahir),
+      status,
+    });
   };
 }
