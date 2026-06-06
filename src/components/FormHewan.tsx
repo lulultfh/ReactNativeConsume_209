@@ -7,4 +7,9 @@ interface HewanProps {
   onSubmit: (data: Omit<Hewan, "id">) => void;
 }
 
-export default function FormHewan() {}
+export default function FormHewan({
+  initialData,
+  loading,
+  submit = "Simpan",
+  onSubmit,
+}: HewanProps) {}
