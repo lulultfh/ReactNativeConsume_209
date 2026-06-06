@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import {
     ActivityIndicator,
     Alert,
-    Platform,
     StyleSheet,
     TextInput,
     TouchableOpacity,
@@ -82,7 +81,7 @@ export default function FormHewan({
       status,
     });
   };
-
+  console.log("showDatePicker:", showDatePicker);
   return (
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
@@ -116,7 +115,10 @@ export default function FormHewan({
           />
           <TouchableOpacity
             style={styles.dateInputButton}
-            onPress={() => setShowDatePicker(true)}
+            onPress={() => {
+              console.log("PENCET TANGGAL");
+              setShowDatePicker(true);
+            }}
             activeOpacity={0.7}
           >
             <ThemedText style={styles.dateText}>
@@ -128,14 +130,19 @@ export default function FormHewan({
             <DateTimePicker
               value={tanggalLahir}
               mode="date"
-              display={Platform.OS === "ios" ? "spinner" : "default"}
+              display="default"
               maximumDate={new Date()}
-              onChange={(_, selectedDate) => {
-                if (selectedDate) {
-                  setTanggalLahir(selectedDate);
+              onValueChange={(event, date) => {
+                console.log("VALUE CHANGE");
+                if (date) {
+                  setTanggalLahir(date);
                 }
+
+                setShowDatePicker(false);
               }}
-              //   maximumDate={new Date()}
+              onDismiss={() => {
+                setShowDatePicker(false);
+              }}
             />
           )}
           <View style={styles.pickerContainer}>
