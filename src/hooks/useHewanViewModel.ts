@@ -28,7 +28,7 @@ export const useHewanViewModel = () => {
     // setError(null);
 
     try {
-      const res = await hewanRepo.getById(id);
+      return await hewanRepo.getById(id);
       // if (res.success) setHewanList(res.data);
     } catch (err: any) {
       setError(err.response?.data?.message || "Gagal mengambil data hewan");
