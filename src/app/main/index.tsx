@@ -4,13 +4,14 @@ import { Spacing } from "@/constants/theme";
 import { useAuthViewModel } from "@/hooks/useAuthViewModel";
 import { useHewanViewModel } from "@/hooks/useHewanViewModel";
 import { router } from "expo-router";
+import { Pencil, Trash2 } from "lucide-react-native";
 import { useEffect } from "react";
 import {
-    Alert,
-    FlatList,
-    RefreshControl,
-    StyleSheet,
-    TouchableOpacity,
+  Alert,
+  FlatList,
+  RefreshControl,
+  StyleSheet,
+  TouchableOpacity,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -94,18 +95,32 @@ export default function DashboardScreen() {
                   Rp{item.harga.toLocaleString("id-ID")}
                 </ThemedText>
               </ThemedView>
-              <TouchableOpacity
-                style={styles.deleteButton}
-                onPress={() => confirmDelete(item.id!, item.nama)}
-              >
-                <ThemedText style={styles.deleteButtonText}>Hapus</ThemedText>
-              </TouchableOpacity>
+              <ThemedView style={styles.actionContainer}>
+                <TouchableOpacity
+                  style={styles.editButton}
+                  onPress={() =>
+                    router.push({
+                      pathname: "/main/edit/[id]",
+                      params: { id: item.id!.toString() },
+                    })
+                  }
+                >
+                  <Pencil size={18} color="#0284c7" />
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={styles.deleteButton}
+                  onPress={() => confirmDelete(item.id!, item.nama)}
+                >
+                  <Trash2 size={18} color="#ef4444" />
+                </TouchableOpacity>
+              </ThemedView>
             </ThemedView>
           )}
         />
         <TouchableOpacity
           style={styles.fab}
-          onPress={() => router.push("/main/form")}
+          onPress={() => router.push("/main/create")}
         >
           <ThemedText style={styles.fabText}>+</ThemedText>
         </TouchableOpacity>
@@ -132,13 +147,13 @@ const styles = StyleSheet.create({
     borderBottomColor: "#f1f5f9",
   },
   logoutButton: {
-    backgroundColor: "3ef4444",
-    fontSize: 12,
+    backgroundColor: "#fff",
+    // fontSize: 12,
     fontWeight: "600",
   },
   logoutText: {
     color: "#ef4444",
-    fontSize: 12,
+    fontSize: 15,
     fontWeight: "600",
   },
   listContent: {
@@ -182,18 +197,32 @@ const styles = StyleSheet.create({
     color: "#94a3b8",
     fontWeight: "600",
   },
-  deleteButton: {
-    backgroundColor: "fff1f1",
-    borderWidth: 1,
-    borderColor: "#fee2e2",
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 10,
+  actionContainer: {
+    flexDirection: "row",
+    gap: 8,
+    backgroundColor: "transparent",
   },
-  deleteButtonText: {
-    color: "#ef4444",
-    fontWeight: "600",
-    fontSize: 13,
+
+  editButton: {
+    width: 38,
+    height: 38,
+    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#eff6ff",
+    borderWidth: 1,
+    borderColor: "#bfdbfe",
+  },
+
+  deleteButton: {
+    width: 38,
+    height: 38,
+    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff1f2",
+    borderWidth: 1,
+    borderColor: "#fecdd3",
   },
   emptyContainer: {
     alignContent: "center",
