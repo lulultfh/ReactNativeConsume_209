@@ -4,6 +4,10 @@
 >Nama: Lu'lu' Luthfiah<br>
 >NIM: 20230140209
 
+- [Teori Pertemuan 14](#screenshot)
+- [Praktikum Pertemuan 14](#screenshot-praktikum-14)
+- [Praktikum Pertemuan 13](#screenshot-praktikum-13)
+
 ## Screenshot
 |**Halaman Login**|**Halaman Register**|
 |----|----|
@@ -21,3 +25,8 @@
 |**Halaman Edit**|**Halaman Edit (Isi Data)**|**Halaman Dashboard (After Edit)**|
 |----|----|----|
 |<img width="1206" height="2533" alt="image" src="https://github.com/user-attachments/assets/a3718f11-a30b-4874-bd94-f5267eb8a623" />|<img width="1206" height="2533" alt="image" src="https://github.com/user-attachments/assets/c3b2bfef-6972-423f-8f80-2e7e98a3e72c" />|<img width="1206" height="2533" alt="image" src="https://github.com/user-attachments/assets/f50fc92b-19c3-4dd3-90a0-8b484ebc9ecd" />|
+
+## Screenshot Praktikum 13
+|**Halaman Tambah**|**Halaman Edit**|
+|----|----|
+|<img width="1206" height="2533" alt="image" src="https://github.com/user-attachments/assets/b63da3e7-0d45-4241-9cce-28046ead381f" />|<img width="1206" height="2533" alt="image" src="https://github.com/user-attachments/assets/12b3118f-9aad-4157-960c-5e49e6f43ea0" />|
