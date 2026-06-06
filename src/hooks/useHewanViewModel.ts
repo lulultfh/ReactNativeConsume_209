@@ -23,6 +23,21 @@ export const useHewanViewModel = () => {
     }
   }, []);
 
+  const fetchHewanById = async (id: number) => {
+    setLoading(true);
+    // setError(null);
+
+    try {
+      const res = await hewanRepo.getById(id);
+      // if (res.success) setHewanList(res.data);
+    } catch (err: any) {
+      setError(err.response?.data?.message || "Gagal mengambil data hewan");
+      return null;
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const addHewan = async (payload: Omit<Hewan, "id">, onSucess: () => void) => {
     setLoading(true);
     try {
