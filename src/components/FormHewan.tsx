@@ -2,6 +2,7 @@ import { Hewan } from "@/domain/entities/Hewan";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Picker } from "@react-native-picker/picker";
 import { useRouter } from "expo-router";
+import { ArrowLeft } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import {
     ActivityIndicator,
@@ -90,7 +91,10 @@ export default function FormHewan({
   return (
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.header}>
+        <ThemedView style={styles.headerRow}>
+          <TouchableOpacity onPress={() => router.back()}>
+            <ArrowLeft size={24} color="#0284c7" />
+          </TouchableOpacity>
           <ThemedText type="title">{title}</ThemedText>
         </ThemedView>
         <ThemedView style={styles.form}>
